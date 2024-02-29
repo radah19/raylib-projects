@@ -74,7 +74,7 @@ int main(void) {
     // ---------------------------- Game Loop ----------------------------
     while (!WindowShouldClose()) {
         //Player Input
-        if (IsMouseButtonPressed(MOUSE_BUTTON_RIGHT)) {
+        if (IsMouseButtonDown(MOUSE_BUTTON_RIGHT)) {
             if (ballsAmn == ballsArrLength) {
                 ballsArrLength *= 2;
                 balls = realloc(balls, sizeof(Ball) * ballsArrLength);
@@ -92,7 +92,7 @@ int main(void) {
             b->radius = GetRandomValue(10.0f, 20.0f);
             b->id = ballsAmn;
 
-            b->mass = b->radius * 10.0f;
+            b->mass = b->radius * 100.0f;
             b->friction = 0.0f;
 
             ballsAmn++;
@@ -142,14 +142,19 @@ int main(void) {
                 b1->vel.y = GetMouseDelta().y;
             }
             else {
-                b1->acc.x = -b1->vel.x * 0.8f;
-                b1->acc.y = -b1->vel.y * 0.8f + 5;
+                b1->acc.x = -(b1->vel.x * 0.05f);
+                b1->acc.y = -(b1->vel.y * 0.05f) + 2 * GetFrameTime() * 60;
 
                 b1->vel.x += b1->acc.x;
                 b1->vel.y += b1->acc.y;
 
                 b1->pos.x += b1->vel.x;
                 b1->pos.y += b1->vel.y;
+
+                if (fabsf(b1->vel.x * b1->vel.x + b1->vel.y * b1->vel.y) <= 0.000000001f) {
+                    b1->vel.x = 0;
+                    b1->vel.y = 0;
+                }
             }
 
             // Static Collisions
@@ -249,14 +254,14 @@ int main(void) {
                 }
 
                 //Collision with walls
-                for (int j = 0; j < wallsAmn; j++) {
-                    if (CheckCollisionCircleRec(b1->pos, b1->radius, walls[j])) {
-                        //Displacement 
-                        while (CheckCollisionCircleRec(b1->pos, b1->radius, walls[j]))
-                            b1->pos.y -= 0.025;
-                        b1->vel.y *= -0.5;
-                    }
-                }
+                //for (int j = 0; j < wallsAmn; j++) {
+                //    if (CheckCollisionCircleRec(b1->pos, b1->radius, walls[j])) {
+                //        //Displacement 
+                //        while (CheckCollisionCircleRec(b1->pos, b1->radius, walls[j]))
+                //            b1->pos.y -= 0.025;
+                //        b1->vel.y *= -0.5;
+                //    }
+                //}
 
             }
 
@@ -278,6 +283,18 @@ int main(void) {
             }
             if (b1->pos.y > screenDimensions + 10) {
                 b1->pos.y = -10;
+            }
+        }
+
+        //Editing Line Segment Positions
+        for (int i = 0; i < segmentsAmn; i++) {
+            if (selectedLineSegment != NULL && selectedLineSegment == &segments[i]) {
+                if (boolSelectedLineStart) {
+                    segments[i].s = GetMousePosition();
+                }
+                else {
+                    segments[i].e = GetMousePosition();
+                }
             }
         }
 
@@ -315,31 +332,19 @@ int main(void) {
             b2->vel.y = ty * dpTan2 + ny * m2;
         }
 
-        //Editing Line Segment Positions
-        for (int i = 0; i < segmentsAmn; i++) {
-            if (selectedLineSegment != NULL && selectedLineSegment == &segments[i]) {
-                if (boolSelectedLineStart) {
-                    segments[i].s = GetMousePosition();
-                }
-                else {
-                    segments[i].e = GetMousePosition();
-                }
-            }
-        }
-
-
-
         // ---------------------------- Drawing ----------------------------
         BeginDrawing();
         ClearBackground(BLACK);
 
         for (int i = 0; i < ballsAmn; i++) {
             DrawCircle(balls[i].pos.x, balls[i].pos.y, balls[i].radius, RED);
+
+            DrawLine(balls[i].pos.x, balls[i].pos.y, balls[i].pos.x + balls[i].vel.x, balls[i].pos.y + balls[i].vel.y, YELLOW);
         }
 
-        for (int i = 0; i < wallsAmn; i++) {
-            DrawRectangle(walls[i].x, walls[i].y, walls[i].width, walls[i].height, GRAY);
-        }
+        //for (int i = 0; i < wallsAmn; i++) {
+        //    DrawRectangle(walls[i].x, walls[i].y, walls[i].width, walls[i].height, GRAY);
+        //}
 
         for (int i = 0; i < segmentsAmn; i++) {
             LineSegment* seg = &segments[i];
