@@ -11,7 +11,7 @@ int main(void) {
         //Drawing
         BeginDrawing();
         ClearBackground(BLACK);
-
+        // fuck you
         EndDrawing();
     }
 
