@@ -1,5 +1,5 @@
 Just my Raylib projects 😸 most code is taken from tutorials
-# Notes to Self for Setup
+## Notes to Self for Setup
 Use this for creating REAL Raylib projects: https://github.com/raysan5/raylib-project-creator
 Otherwise create an individual C file with this starter code:
 ```c
@@ -24,8 +24,10 @@ int main(void) {
     return 0;
 }
 ```
-Remember to also add `C:\raylib\raylib\src\raylib.h` to the include directory of whatever C project you're working on.
-
 These links have quick start templates/guides for developing on VS 2022:
 https://github.com/raysan5/raylib/wiki/Working-on-Windows
 https://github.com/raylib-extras/raylib-quickstart
+
+These videos made it easy to do:
+https://www.youtube.com/watch?v=O96m52ZxQcw
+https://www.youtube.com/watch?v=xRMN__GECt8
