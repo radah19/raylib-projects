@@ -1,4 +1,7 @@
 ﻿  test_raylib.c
-  LINK : C:\Users\anuja\Projects\raylib-projects\test_raylib\x64\Debug\test_raylib.exe not found or not built by the last incremental link; performing full link
-LINK : warning LNK4098: defaultlib 'MSVCRT' conflicts with use of other libs; use /NODEFAULTLIB:library
+C:\Users\anuja\Projects\raylib-projects\test_raylib\test_raylib.c(36,63): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+C:\Users\anuja\Projects\raylib-projects\test_raylib\test_raylib.c(39,63): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+C:\Users\anuja\Projects\raylib-projects\test_raylib\test_raylib.c(203,38): warning C4244: 'function': conversion from 'float' to 'int', possible loss of data
+C:\Users\anuja\Projects\raylib-projects\test_raylib\test_raylib.c(203,56): warning C4244: 'function': conversion from 'float' to 'int', possible loss of data
+C:\Users\anuja\Projects\raylib-projects\test_raylib\test_raylib.c(203,70): warning C4244: 'function': conversion from 'int' to 'float', possible loss of data
   test_raylib.vcxproj -> C:\Users\anuja\Projects\raylib-projects\test_raylib\x64\Debug\test_raylib.exe

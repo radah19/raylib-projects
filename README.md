@@ -25,9 +25,9 @@ int main(void) {
 }
 ```
 These links have quick start templates/guides for developing on VS 2022:
-https://github.com/raysan5/raylib/wiki/Working-on-Windows
-https://github.com/raylib-extras/raylib-quickstart
+- https://github.com/raysan5/raylib/wiki/Working-on-Windows
+- https://github.com/raylib-extras/raylib-quickstart
 
 These videos made it easy to do:
-https://www.youtube.com/watch?v=O96m52ZxQcw
-https://www.youtube.com/watch?v=xRMN__GECt8
+- https://www.youtube.com/watch?v=O96m52ZxQcw
+- https://www.youtube.com/watch?v=xRMN__GECt8
