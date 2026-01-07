@@ -158,7 +158,7 @@ int main(void) {
         break;
     }
     case 2: { // Two Suns (French) and Two Planets (American)
-        planetsAmn = 6;
+        planetsAmn = 9;
         planets = malloc(sizeof(Planet) * planetsAmn);
 
         Planet* toad = &planets[0];
@@ -169,7 +169,7 @@ int main(void) {
         toad->radius = 20;
         toad->imoveable = true;
         toad->eatable = false;
-        toad->col = GREEN;
+        toad->col = WHITE;
 
         Planet* badoum = &planets[1];
         badoum->pos.x = 200;
@@ -179,7 +179,7 @@ int main(void) {
         badoum->radius = 20;
         badoum->imoveable = true;
         badoum->eatable = false;
-        badoum->col = BLUE;
+        badoum->col = WHITE;
 
         Planet* tito = &planets[2];
         tito->pos.x = 400;
@@ -196,7 +196,7 @@ int main(void) {
         dongo->pos.y = 210;
         dongo->delta.x = 1;
         dongo->delta.y = 2;
-        dongo->radius = 5;
+        dongo->radius = 6;
         dongo->imoveable = false;
         dongo->eatable = false;
         dongo->col = YELLOW;
@@ -206,10 +206,10 @@ int main(void) {
         noodle->pos.y = 200;
         noodle->delta.x = 1;
         noodle->delta.y = 2;
-        noodle->radius = 3;
+        noodle->radius = 8;
         noodle->imoveable = false;
         noodle->eatable = false;
-        noodle->col = PINK;
+        noodle->col = PURPLE;
 
         Planet* schmicheal = &planets[5];
         schmicheal->pos.x = 300;
@@ -219,13 +219,43 @@ int main(void) {
         schmicheal->radius = 6;
         schmicheal->imoveable = false;
         schmicheal->eatable = false;
-        schmicheal->col = ORANGE;
+        schmicheal->col = SKYBLUE;
+
+        Planet* flare = &planets[6];
+        flare->pos.x = 700;
+        flare->pos.y = 700;
+        flare->delta.x = 0;
+        flare->delta.y = 0;
+        flare->radius = 7;
+        flare->imoveable = false;
+        flare->eatable = false;
+        flare->col = ORANGE;
+
+        Planet* kel = &planets[7];
+        kel->pos.x = 450;
+        kel->pos.y = 450;
+        kel->delta.x = 0;
+        kel->delta.y = 0;
+        kel->radius = 8;
+        kel->imoveable = false;
+        kel->eatable = false;
+        kel->col = GREEN;
+
+        Planet* starch = &planets[8];
+        starch->pos.x = 900;
+        starch->pos.y = 900;
+        starch->delta.x = 0;
+        starch->delta.y = 0;
+        starch->radius = 12;
+        starch->imoveable = false;
+        starch->eatable = false;
+        starch->col = PINK;
 
         break;
     }
     }
 
-    int linePointAmn = 150;
+    int linePointAmn = 500;
     int totalLines = planetsAmn * linePointAmn;
     Vector2* lines = malloc(sizeof(Vector2) * totalLines);
     // Initialize points in line to invalid values
@@ -254,7 +284,7 @@ int main(void) {
                 DrawLineEx(
                     lines[j + i * linePointAmn],
                     lines[j + 1 + i * linePointAmn],
-                    4,
+                    planets[i].radius * 0.5,
                     (Color) { planets[i].col.r, planets[i].col.g, planets[i].col.b, 255 * ((float)j / linePointAmn) }
                 );
             }

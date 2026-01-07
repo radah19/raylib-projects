@@ -1,10 +1,11 @@
 ﻿  test_raylib.c
 C:\Users\anuja\Projects\raylib-projects\test_raylib\test_raylib.c(39,63): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
 C:\Users\anuja\Projects\raylib-projects\test_raylib\test_raylib.c(42,63): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
-C:\Users\anuja\Projects\raylib-projects\test_raylib\test_raylib.c(245,38): warning C4244: 'function': conversion from 'float' to 'int', possible loss of data
-C:\Users\anuja\Projects\raylib-projects\test_raylib\test_raylib.c(245,56): warning C4244: 'function': conversion from 'float' to 'int', possible loss of data
-C:\Users\anuja\Projects\raylib-projects\test_raylib\test_raylib.c(245,70): warning C4244: 'function': conversion from 'int' to 'float', possible loss of data
-C:\Users\anuja\Projects\raylib-projects\test_raylib\test_raylib.c(258,89): warning C4244: 'initializing': conversion from 'float' to 'unsigned char', possible loss of data
-C:\Users\anuja\Projects\raylib-projects\test_raylib\test_raylib.c(252,25): warning C4101: 'nextPoint': unreferenced local variable
-C:\Users\anuja\Projects\raylib-projects\test_raylib\test_raylib.c(251,25): warning C4101: 'point': unreferenced local variable
+C:\Users\anuja\Projects\raylib-projects\test_raylib\test_raylib.c(275,38): warning C4244: 'function': conversion from 'float' to 'int', possible loss of data
+C:\Users\anuja\Projects\raylib-projects\test_raylib\test_raylib.c(275,56): warning C4244: 'function': conversion from 'float' to 'int', possible loss of data
+C:\Users\anuja\Projects\raylib-projects\test_raylib\test_raylib.c(275,70): warning C4244: 'function': conversion from 'int' to 'float', possible loss of data
+C:\Users\anuja\Projects\raylib-projects\test_raylib\test_raylib.c(287,39): warning C4244: 'function': conversion from 'double' to 'float', possible loss of data
+C:\Users\anuja\Projects\raylib-projects\test_raylib\test_raylib.c(288,89): warning C4244: 'initializing': conversion from 'float' to 'unsigned char', possible loss of data
+C:\Users\anuja\Projects\raylib-projects\test_raylib\test_raylib.c(282,25): warning C4101: 'nextPoint': unreferenced local variable
+C:\Users\anuja\Projects\raylib-projects\test_raylib\test_raylib.c(281,25): warning C4101: 'point': unreferenced local variable
   test_raylib.vcxproj -> C:\Users\anuja\Projects\raylib-projects\test_raylib\x64\Debug\test_raylib.exe
