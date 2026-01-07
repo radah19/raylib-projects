@@ -4,6 +4,7 @@ Use this for creating REAL Raylib projects: https://github.com/raysan5/raylib-pr
 Otherwise create an individual C file with this starter code:
 ```c
 #include "raylib.h"
+#include <stdlib.h>
 
 int main(void) {
     const int screenWidth = 640;
@@ -24,10 +25,11 @@ int main(void) {
     return 0;
 }
 ```
+### Visual Studio 2022 Development
 These links have quick start templates/guides for developing on VS 2022:
 - https://github.com/raysan5/raylib/wiki/Working-on-Windows
 - https://github.com/raylib-extras/raylib-quickstart
 
-These videos made it easy to do:
+These videos made Raylib library linking into VS 2022 easy to do:
 - https://www.youtube.com/watch?v=O96m52ZxQcw
 - https://www.youtube.com/watch?v=xRMN__GECt8

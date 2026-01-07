@@ -8,16 +8,19 @@ typedef struct {
     Vector2 pos;
     Vector2 delta; // (0,0) by default
 
-    int radius; 
+    int radius;
     bool imoveable; // false by default
     bool eatable; // defines whether the planet can be eaten by others, eek!
+    Color col;
 } Planet;
 
-void process(int index, Planet* planets, int planetsAmn) {
+void process(int index, Planet* planets, int planetsAmn, Vector2* lines, int linePointAmn) {
     // Calculates where the provided planet should go every frame
     Planet* p = &planets[index];
 
     if (!p->imoveable) {
+
+        // Update Position
         for (int i = 0; i < planetsAmn; i++) {
             if (index != i) {
                 // If planet can be eaten
@@ -43,12 +46,13 @@ void process(int index, Planet* planets, int planetsAmn) {
 
         p->pos.x += p->delta.x;
         p->pos.y += p->delta.y;
+
+        // Update my trail
+        for (int i = 0; i < linePointAmn - 1; i++) {
+            lines[i + index * linePointAmn] = lines[i + 1 + index * linePointAmn];
+        }
+        lines[linePointAmn - 1 + index * linePointAmn] = planets[index].pos;
     }
-}
-
-void initPlanetsArr(Planet** planets, int* planetsAmn, int key) {
-    
-
 }
 
 int main(void) {
@@ -59,135 +63,173 @@ int main(void) {
     Planet* planets = 0;
     int planetsAmn = 0;
     int key = 2;
-    
+
     switch (key) {
-        case 0: { // Sun with two opposing planets
-            planetsAmn = 3;
-            planets = malloc(sizeof(Planet) * planetsAmn);
+    case 0: { // Sun with two opposing planets
+        planetsAmn = 3;
+        planets = malloc(sizeof(Planet) * planetsAmn);
 
-            Planet* sun = &planets[0];
-            sun->pos.x = 400;
-            sun->pos.y = 400;
-            sun->delta.x = 0;
-            sun->delta.y = 0;
-            sun->radius = 50;
-            sun->imoveable = true;
-            sun->eatable = false;
+        Planet* sun = &planets[0];
+        sun->pos.x = 400;
+        sun->pos.y = 400;
+        sun->delta.x = 0;
+        sun->delta.y = 0;
+        sun->radius = 50;
+        sun->imoveable = true;
+        sun->eatable = false;
+        sun->col = YELLOW;
 
-            Planet* toad = &planets[1];
-            toad->pos.x = 400;
-            toad->pos.y = 200;
-            toad->delta.x = 3;
-            toad->delta.y = 0;
-            toad->radius = 10;
-            toad->imoveable = false;
-            toad->eatable = true;
+        Planet* toad = &planets[1];
+        toad->pos.x = 400;
+        toad->pos.y = 200;
+        toad->delta.x = 3;
+        toad->delta.y = 0;
+        toad->radius = 10;
+        toad->imoveable = false;
+        toad->eatable = true;
+        toad->col = GREEN;
 
-            Planet* badoum = &planets[2];
-            badoum->pos.x = 400;
-            badoum->pos.y = 600;
-            badoum->delta.x = -3;
-            badoum->delta.y = 0;
-            badoum->radius = 10;
-            badoum->imoveable = false;
-            badoum->eatable = true;
+        Planet* badoum = &planets[2];
+        badoum->pos.x = 400;
+        badoum->pos.y = 600;
+        badoum->delta.x = -3;
+        badoum->delta.y = 0;
+        badoum->radius = 10;
+        badoum->imoveable = false;
+        badoum->eatable = true;
+        badoum->col = BLUE;
 
-            break;
-        }
-        case 1: { // Sun with 4 opposing planets
-            planetsAmn = 5;
-            planets = malloc(sizeof(Planet) * planetsAmn);
-
-            Planet* sun = &planets[0];
-            sun->pos.x = 400;
-            sun->pos.y = 400;
-            sun->delta.x = 0;
-            sun->delta.y = 0;
-            sun->radius = 50;
-            sun->imoveable = true;
-            sun->eatable = false;
-
-            Planet* toad = &planets[1];
-            toad->pos.x = 400;
-            toad->pos.y = 200;
-            toad->delta.x = 3;
-            toad->delta.y = 0;
-            toad->radius = 10;
-            toad->imoveable = false;
-            toad->eatable = true;
-
-            Planet* badoum = &planets[2];
-            badoum->pos.x = 400;
-            badoum->pos.y = 600;
-            badoum->delta.x = -3;
-            badoum->delta.y = 0;
-            badoum->radius = 10;
-            badoum->imoveable = false;
-            badoum->eatable = true;
-
-            Planet* tito = &planets[3];
-            tito->pos.x = 200;
-            tito->pos.y = 400;
-            tito->delta.x = 0;
-            tito->delta.y = -3;
-            tito->radius = 10;
-            tito->imoveable = false;
-            tito->eatable = true;
-
-            Planet* dongo = &planets[4];
-            dongo->pos.x = 600;
-            dongo->pos.y = 400;
-            dongo->delta.x = 0;
-            dongo->delta.y = 3;
-            dongo->radius = 10;
-            dongo->imoveable = false;
-            dongo->eatable = true;
-
-            break;
-        }
-        case 2: { // Two Suns (French) and Two Planets (American)
-            planetsAmn = 4;
-            planets = malloc(sizeof(Planet) * planetsAmn);
-
-            Planet* toad = &planets[0];
-            toad->pos.x = 600;
-            toad->pos.y = 400;
-            toad->delta.x = 0;
-            toad->delta.y = 0;
-            toad->radius = 20;
-            toad->imoveable = true;
-            toad->eatable = false;
-
-            Planet* badoum = &planets[1];
-            badoum->pos.x = 200;
-            badoum->pos.y = 400;
-            badoum->delta.x = 0;
-            badoum->delta.y = 0;
-            badoum->radius = 20;
-            badoum->imoveable = true;
-            badoum->eatable = false;
-
-            Planet* tito = &planets[2];
-            tito->pos.x = 400;
-            tito->pos.y = 200;
-            tito->delta.x = 0;
-            tito->delta.y = 0;
-            tito->radius = 10;
-            tito->imoveable = false;
-            tito->eatable = false;
-
-            Planet* dongo = &planets[3];
-            dongo->pos.x = 400;
-            dongo->pos.y = 210;
-            dongo->delta.x = 1;
-            dongo->delta.y = 2;
-            dongo->radius = 5;
-            dongo->imoveable = false;
-            dongo->eatable = false;
-
-            break;
-        }
+        break;
     }
+    case 1: { // Sun with 4 opposing planets
+        planetsAmn = 5;
+        planets = malloc(sizeof(Planet) * planetsAmn);
+
+        Planet* sun = &planets[0];
+        sun->pos.x = 400;
+        sun->pos.y = 400;
+        sun->delta.x = 0;
+        sun->delta.y = 0;
+        sun->radius = 50;
+        sun->imoveable = true;
+        sun->eatable = false;
+        sun->col = YELLOW;
+
+        Planet* toad = &planets[1];
+        toad->pos.x = 400;
+        toad->pos.y = 200;
+        toad->delta.x = 3;
+        toad->delta.y = 0;
+        toad->radius = 10;
+        toad->imoveable = false;
+        toad->eatable = true;
+        toad->col = GREEN;
+
+        Planet* badoum = &planets[2];
+        badoum->pos.x = 400;
+        badoum->pos.y = 600;
+        badoum->delta.x = -3;
+        badoum->delta.y = 0;
+        badoum->radius = 10;
+        badoum->imoveable = false;
+        badoum->eatable = true;
+        badoum->col = BLUE;
+
+        Planet* tito = &planets[3];
+        tito->pos.x = 200;
+        tito->pos.y = 400;
+        tito->delta.x = 0;
+        tito->delta.y = -3;
+        tito->radius = 10;
+        tito->imoveable = false;
+        tito->eatable = true;
+        tito->col = RED;
+
+        Planet* dongo = &planets[4];
+        dongo->pos.x = 600;
+        dongo->pos.y = 400;
+        dongo->delta.x = 0;
+        dongo->delta.y = 3;
+        dongo->radius = 10;
+        dongo->imoveable = false;
+        dongo->eatable = true;
+        dongo->col = PURPLE;
+
+        break;
+    }
+    case 2: { // Two Suns (French) and Two Planets (American)
+        planetsAmn = 6;
+        planets = malloc(sizeof(Planet) * planetsAmn);
+
+        Planet* toad = &planets[0];
+        toad->pos.x = 600;
+        toad->pos.y = 400;
+        toad->delta.x = 0;
+        toad->delta.y = 0;
+        toad->radius = 20;
+        toad->imoveable = true;
+        toad->eatable = false;
+        toad->col = GREEN;
+
+        Planet* badoum = &planets[1];
+        badoum->pos.x = 200;
+        badoum->pos.y = 400;
+        badoum->delta.x = 0;
+        badoum->delta.y = 0;
+        badoum->radius = 20;
+        badoum->imoveable = true;
+        badoum->eatable = false;
+        badoum->col = BLUE;
+
+        Planet* tito = &planets[2];
+        tito->pos.x = 400;
+        tito->pos.y = 200;
+        tito->delta.x = 0;
+        tito->delta.y = 0;
+        tito->radius = 10;
+        tito->imoveable = false;
+        tito->eatable = false;
+        tito->col = RED;
+
+        Planet* dongo = &planets[3];
+        dongo->pos.x = 400;
+        dongo->pos.y = 210;
+        dongo->delta.x = 1;
+        dongo->delta.y = 2;
+        dongo->radius = 5;
+        dongo->imoveable = false;
+        dongo->eatable = false;
+        dongo->col = YELLOW;
+
+        Planet* noodle = &planets[4];
+        noodle->pos.x = 445;
+        noodle->pos.y = 200;
+        noodle->delta.x = 1;
+        noodle->delta.y = 2;
+        noodle->radius = 3;
+        noodle->imoveable = false;
+        noodle->eatable = false;
+        noodle->col = PINK;
+
+        Planet* schmicheal = &planets[5];
+        schmicheal->pos.x = 300;
+        schmicheal->pos.y = 400;
+        schmicheal->delta.x = 2;
+        schmicheal->delta.y = 0;
+        schmicheal->radius = 6;
+        schmicheal->imoveable = false;
+        schmicheal->eatable = false;
+        schmicheal->col = ORANGE;
+
+        break;
+    }
+    }
+
+    int linePointAmn = 150;
+    int totalLines = planetsAmn * linePointAmn;
+    Vector2* lines = malloc(sizeof(Vector2) * totalLines);
+    // Initialize points in line to invalid values
+    for (int i = 0; i < totalLines; i++) lines[i] = (Vector2){ -1, -1 };
 
     InitWindow(screenWidth, screenHeight, "PlanetSim");
     SetTargetFPS(60);
@@ -196,11 +238,26 @@ int main(void) {
         // Drawing
         BeginDrawing();
         ClearBackground(BLACK);
-        
-        for (int i = 0; i < planetsAmn; i++) {
-            process(i, planets, planetsAmn);
 
-            DrawCircle(planets[i].pos.x, planets[i].pos.y, planets[i].radius, WHITE);
+        for (int i = 0; i < planetsAmn; i++) {
+            process(i, planets, planetsAmn, lines, linePointAmn);
+
+            DrawCircle(planets[i].pos.x, planets[i].pos.y, planets[i].radius, planets[i].col);
+
+            // Draw Planet Trail
+            for (int j = 0; j < linePointAmn - 1; j++) {
+                if (lines[j + i * linePointAmn].x == -1 && lines[j + i * linePointAmn].y == -1) continue;
+
+                Vector2 point = lines[j + i * linePointAmn];
+                Vector2 nextPoint = lines[j + 1 + i * linePointAmn];
+
+                DrawLineEx(
+                    lines[j + i * linePointAmn],
+                    lines[j + 1 + i * linePointAmn],
+                    4,
+                    (Color) { planets[i].col.r, planets[i].col.g, planets[i].col.b, 255 * ((float)j / linePointAmn) }
+                );
+            }
         }
 
         EndDrawing();
@@ -208,6 +265,7 @@ int main(void) {
 
     // Cleanup
     free(planets);
+    free(lines);
     CloseWindow();
     return 0;
 }
